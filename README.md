@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Reto **Rest Countries**  
+Integración Next.js + REST Countries API
 
-## Getting Started
+## Índice
+1. [Descripción general](#descripción-general)  
+2. [Stack y dependencias](#stack-y-dependencias)  
+3. [Estructura de carpetas](#estructura-de-carpetas)  
+4. [Puesta en marcha](#puesta-en-marcha)  
+5. [Scripts npm](#scripts-npm)  
+6. [Variables de entorno](#variables-de-entorno)  
+7. [Convenciones de código](#convenciones-de-código)  
+8. [Pruebas unitarias](#pruebas-unitarias)  
+9. [Pendientes / mejoras futuras](#pendientes--mejoras-futuras)
 
-First, run the development server:
+---
 
+## Descripción general
+Este proyecto resuelve el desafío de integración con la **REST Countries API** (`https://restcountries.com/`) para mostrar información de todos los países siguiendo los diseños suministrados.
+
+### Funcionalidades clave
+| Requisito | Implementación |
+|-----------|----------------|
+| **Next.js** como framework base | App Router (`app/`) y TypeScript |
+| **Consumo HTTP** | Axios (puede sustituirse fácilmente) |
+| **Buscador** | Filtro en tiempo real por nombre |
+| **Filtro por región** | Desplegable con todas las regiones únicas |
+| **Vista detalle** | Ruta dinámica `/country/[slug]` con datos ampliados |
+| **Responsive design** | Tailwind CSS + Mobile-First |
+| **Dark Mode** | Conmutador _light / dark_ persistente (`localStorage`) |
+| **Pruebas unitarias** | Jest + ts-jest (lógica de API, filtros y paginación) |
+
+---
+
+## Stack y dependencias
+| Categoría | Paquete | Uso |
+|-----------|---------|-----|
+| **Framework** | `next` ^14 | SSR/SSG & Router |
+| **Lenguaje** | `typescript` ^5 | Tipado estricto |
+| **Estilos** | `tailwindcss` ^3 | Utilidades + theming |
+| **HTTP** | `axios` ^1 | Peticiones a REST Countries |
+| **Iconos** | `react-icons` ^5 (io5) | UI consistente |
+| **Tests** | `jest`, `ts-jest`, `@types/jest` | Unit tests |
+
+
+---
+
+## Estructura de carpetas
+```
+├─ .next/                         # directorio generado por Next (build)
+├─ app/
+│  ├─ (pages)/
+│  │  ├─ (home)/
+│  │  │  └─ page.tsx             # página principal con listado de países
+│  │  ├─ api/
+│  │  │  └─ country/
+│  │  │     └─ route.ts          # handler (GET) que proxea la API REST Countries
+│  │  └─ country/
+│  │     └─ [slug]/
+│  │        └─ page.tsx          # vista detalle por país
+│  ├─ components/
+│  │  ├─ CountriesList.tsx       # grid + búsqueda + filtros
+│  │  └─ Header.tsx              # header con toggle dark / light
+│  ├─ test/
+│  │  └─ countries.test.ts       # pruebas unitarias de route.ts
+│  └─ layout.tsx                 # layout raíz (incluye dark-mode toggle)
+├─ types/
+│  └─ country.ts                 # tipado de Country (API v3)
+
+├─ node_modules/
+├─ package.json
+├─ tsconfig.json
+└─ README.md
+
+
+---
+
+## Puesta en marcha
+
+### Requisitos
+* Node >= 18  
+* Yarn 1 o npm >= 8
+
+### Instalación
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/<usuario>/rest-countries-challenge.git
+cd rest-countries-challenge
+yarn install        # o npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Desarrollo
+```bash
+yarn dev            # levanta http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build producción
+```bash
+yarn build
+yarn start          # serve en modo producción
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Scripts npm
+| Script | Acción |
+|--------|--------|
+| `dev` | Inicia servidor Next.js en modo desarrollo |
+| `build` | Compila para producción |
+| `start` | Sirve la carpeta `.next/` generada |
+| `lint` | Ejecuta ESLint + Prettier |
+| `test` | Ejecuta Jest con cobertura |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Variables de entorno
+Crear `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+# Endpoint base para REST Countries (permite cambiarlo/ mockearlo)
+RESTCOUNTRIES_BASE_URL=https://restcountries.com/v3.1
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Pruebas unitarias
+```bash
+yarn test         
+
+```
+
+
+---
+
+### Autor
+**Carlos Guerra** – *Fullstack Developer*  
+📧 <guerracarlosandres11@gmail.com> • 🔗 Despligue 
+
