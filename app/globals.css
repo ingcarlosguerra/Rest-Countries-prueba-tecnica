@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
 :root {
   --color-dark-blue: hsl(209, 23%, 22%);
   --color-very-dark-blue-bg: hsl(207, 26%, 17%);
@@ -14,26 +14,17 @@
   --transition-duration: 200ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+@theme {
+    --font-sans: 'Nunito Sans', sans-serif;
+
 }
 
 .attribution {
   font-size: 11px;
   text-align: center;
-}
-.attribution a {
-  color: hsl(228, 45%, 44%);
 }
 
 
@@ -44,7 +35,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-sans);
+  font-family: var(--nunito-sans);
   font-size: 14px;
   transition: all var(--transition-duration) ease, color var(--transition-duration) ease;
 }

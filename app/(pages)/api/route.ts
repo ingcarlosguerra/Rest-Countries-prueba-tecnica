@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const { data } = await axios.get('https://restcountries.com/v3.1/all', {
+    const { data } = await axios.get(`${process.env.RESTCOUNTRIES_BASE_URL}/all`, {
       params: { fields: 'flags,flag,name,borders,population,region,capital,subregion,currencies,languages' }
     });
     //console.log(data);

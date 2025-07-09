@@ -10,19 +10,19 @@ export async function GET(
 
   try {
     const { data } = await axios.get(
-      `https://restcountries.com/v3.1/name/${encodeURIComponent(name)}`,
+      `${process.env.RESTCOUNTRIES_BASE_URL}/name//${encodeURIComponent(name)}`,
       {
 
         params: {
           fields:
-            'flag,name,topleveldomain,population,region,capital,subregion,currencies,languages',
+            'flags,flag,name,borders,population,region,capital,subregion,currencies,languages',
 
         },
       }
     );
 
     const country = Array.isArray(data) ? data[0] : data;
-    console.log(country);
+    //console.log(country);
     return NextResponse.json(country);
   } catch (error: any) {
     const status = error.response?.status ?? 500;
