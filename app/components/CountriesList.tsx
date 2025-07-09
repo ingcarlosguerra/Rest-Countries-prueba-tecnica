@@ -21,7 +21,7 @@ export default function CountryList() {
       .get<Country[]>('/api')
       .then(res => {
         setData(res.data);
-        console.log('🎉 Datos recibidos:', res.data);
+        console.log(' Datos recibidos:', res.data);
       })
       .catch(err => {
         console.error(err);
@@ -126,7 +126,7 @@ export default function CountryList() {
             <Link href={`/country/${encodeURIComponent(country.name.common)}`}>
               <img
                 className="rounded-t-lg aspect-video object-center object-cover"
-                src={`https://flagcdn.com/${flagEmojiToCode(country.flag)}.svg`}
+                src={`${country.flags.svg}`}
                 alt={`${country.name.common} flag`}
               />
             </Link>

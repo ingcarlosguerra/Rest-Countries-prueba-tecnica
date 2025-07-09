@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import data from "@/app/data/data.json";
 import Image from "next/image";
 import Link from "next/link";
-import { Country } from '@/app/types/country';
+import  Country  from '@/app/types/country';
+import axios from "axios";
 
 
 export default async function CountryDetails({
@@ -11,13 +12,27 @@ export default async function CountryDetails({
     params: Promise<{ slug: string }>
   }) {
     
-    const slug = (await params).slug
+  const slug = (await params).slug
 
-  const country: Country | undefined = data.find(
-    (c) => c.name === decodeURIComponent(slug)
+
+  const { data: apidata } = await axios.get<Country[]>(
+    `https://restcountries.com/v3.1/name/${slug}`, {
+              params: {
+          fields:
+            'flags,flag,name,borders,population,region,capital,subregion,currencies,languages',
+
+        },
+    }
+  );
+  
+
+   console.log(apidata);
+
+  const country: Country | undefined = apidata.find(
+    (c) => c.name.common === decodeURIComponent(slug)
   );
 
-  if (!country) return redirect("/");
+  if (!country) { redirect("/")};
 
   interface PropertyProps {
     label: string;
@@ -49,30 +64,37 @@ export default async function CountryDetails({
           <Image
             width={500}
             height={500}
-            src={country.flag}
-            alt={`${country.name} flag`}
+            src={country.flags.svg}
+            alt={`${country.flags.alt} flag`}
             className="w-full h-auto object-cover rounded-lg shadow-sm shadow-gray-950/20"
           />
           <div className="grid  sm:grid-cols-2 h-min my-auto py-6 gap-2">
             <h1 className="text-4xl font-semibold sm:col-span-2">
-              {country.name}
+              {country.name.common}
             </h1>
-            <Property label="Native Name:" value={country.nativeName} />
+            <Property label="Native Name:" value={country.name.official} />
             <Property
               label="Top Level Domain:"
-              value={country.topLevelDomain?.join(", ")}
+              value={country.flag}
             />
             <Property label="Population:" value={country.population} />
             <Property
               label="Currencies:"
-              value={country.currencies
-                ?.map((currency) => `${currency.name} (${currency.symbol})`)
-                .join(", ")}
+              value={
+                  country.currencies &&
+                  Object.values(country.currencies)
+                    .map(({ name, symbol }) => `${name} (${symbol})`)
+                    .join(", ")
+                }
+
             />
             <Property label="Region:" value={country.region} />
             <Property
               label="Languages:"
-              value={country.languages?.map((lang) => lang.name).join(", ")}
+                value={
+                  country.languages &&
+                  Object.values(country.languages).join(", ")
+                }
             />
             <Property label="Sub Region:" value={country.subregion} col="2" />
             <Property label="Capital:" value={country.capital} />

@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
-// ruta para traer todos los paises 
+
 export async function GET() {
   try {
     const { data } = await axios.get('https://restcountries.com/v3.1/all', {
-      params: { fields: 'flag,name,topleveldomain,population,region,capital,subregion,currencies,languages' }
+      params: { fields: 'flags,flag,name,borders,population,region,capital,subregion,currencies,languages' }
     });
     //console.log(data);
     return NextResponse.json(data);

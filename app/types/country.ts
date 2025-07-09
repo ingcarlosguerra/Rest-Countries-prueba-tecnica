@@ -1,28 +1,5 @@
 
 
-// export default interface Country {
-//   flag: string;
-//   name: string;
-//   nativeName: string;
-//   topLevelDomain: string[];
-//   population: number;
-//   region: string;
-//   capital?: string;
-//   subregion: string;
-//   currencies?: {
-//     code: string;
-//     name: string;
-//     symbol: string;
-//   }[];
-//   languages: {
-//     iso639_1?: string;
-//     iso639_2: string;
-//     name: string;
-//     nativeName?: string;
-//   }[];
-//   borders?: string[];
-// }
-
 
 export default interface Country {
   name: {
@@ -41,12 +18,19 @@ export default interface Country {
       symbol: string;
     }
   };
-  capital?: string[];
+  capital?: string;
   region: string;
   subregion?: string;
   languages?: {
     [langCode: string]: string;
   };
-  flag: string;          // el emoji de la bandera
+  flags: {
+    png : string;
+    svg: string;
+    alt: string;
+  }         
   population: number;
+  borders?:[string];
+  flag: string;
+
 }
