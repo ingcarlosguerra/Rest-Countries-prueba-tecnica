@@ -5,7 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import type Country from "../types/country";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
+import { IoSearch } from "react-icons/io5";
 const itemsPerPage = 8;
 
 const spinner =
@@ -13,6 +15,7 @@ const spinner =
   btoa(
     `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 30' fill='#888'><circle cx='15' cy='15' r='15'><animate attributeName='opacity' from='1' to='0.2' dur='0.8s' repeatCount='indefinite'/></circle><circle cx='60' cy='15' r='15' opacity='0.2'><animate attributeName='opacity' from='0.2' to='1' dur='0.8s' repeatCount='indefinite'/></circle><circle cx='105' cy='15' r='15'><animate attributeName='opacity' from='1' to='0.2' dur='0.8s' repeatCount='indefinite'/></circle></svg>`
   );
+
 
 export default function CountryList() {
   const [search, setSearch] = useState("");
@@ -67,22 +70,29 @@ export default function CountryList() {
   return (
     <>
       <div className="max-w-5xl mx-auto grid grid-cols-1 gap-4 px-4 lg:px-0 py-6 sm:grid-cols-2">
+
         <label className="bg-gray-200 dark:bg-gray-900 px-4 py-2 rounded-sm flex space-x-2 w-full sm:max-w-64">
+          <IoSearch className="w-4 h-4 text-gray-600 dark:text-gray-400" />
           <input
             type="text"
             placeholder="Search for a country"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="text-gray-700 dark:placeholder:text-gray-400 dark:text-gray-400 focus:outline-none w-full"
+            
           />
         </label>
 
         <div className="relative ml-auto w-full sm:max-w-64">
+
           <button
             onClick={() => setIsOpen((o) => !o)}
             className="w-full bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-400 rounded-sm py-2 px-4 flex justify-between items-center"
           >
             {selectedRegion}
+            
+            <RiArrowDropDownLine />
+
           </button>
           {isOpen && (
             <ul className="absolute w-full mt-1 bg-white dark:bg-gray-800 shadow-lg rounded-md max-h-40 overflow-y-auto z-10">
