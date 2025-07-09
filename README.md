@@ -75,15 +75,6 @@ Este proyecto resuelve el desafío de integración con la **REST Countries API**
 ---
 
 ## Puesta en marcha
-
-### Requisitos
-* Node >= 18  
-* Yarn 1 o npm >= 8
-
-### Instalación
-```bash
-git clone https://github.com/<usuario>/rest-countries-challenge.git
-cd rest-countries-challenge
 yarn install        # o npm install
 ```
 
@@ -115,7 +106,6 @@ yarn start          # serve en modo producción
 Crear `.env.local`:
 
 ```env
-# Endpoint base para REST Countries (permite cambiarlo/ mockearlo)
 RESTCOUNTRIES_BASE_URL=https://restcountries.com/v3.1
 ```
 
