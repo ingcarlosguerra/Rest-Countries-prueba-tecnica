@@ -134,5 +134,5 @@ yarn test
 
 ### Autor
 **Carlos Guerra** – *Fullstack Developer*  
-📧 <guerracarlosandres11@gmail.com> • 🔗 Despligue 
+📧 <guerracarlosandres11@gmail.com> • 🔗 Despligue https://prueba-tecnica-bia.vercel.app/
 
